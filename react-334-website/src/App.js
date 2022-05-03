@@ -7,9 +7,6 @@ function App() {
     <>
     <Router>
     <div className="App">
-      <h1>
-        334 Prescription
-      </h1>
       <Sidebar></Sidebar>
       <Routes>
         <Route path ='/' exact />
