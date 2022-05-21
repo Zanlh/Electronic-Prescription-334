@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import cx from 'classnames';
 import { useParams } from 'react-router-dom';
 
+import * as ROUTES from '../../routes/paths';
+
 import styles from './style.module.css';
 
 import * as LINKS from './links';
@@ -14,19 +16,20 @@ const Sidebar = (props) => {
   console.log('path', pathname);
   const links = () => {
     switch (pathname) {
-      case "/login":
-      case "/signup":
+      case ROUTES.LOGIN:
+      case ROUTES.SIGNUP:
         return LINKS.LOGIN_SIGNUP;
-      case "/user-history":
-      case "/token":
+      case ROUTES.PRESCRIPTIONHISTORY:
+      case ROUTES.TOKEN:
+      case ROUTES.USER_PRESCRIPTION:
+      case ROUTES.USER_TREATMANT:
         return LINKS.USER_PRESCRIPTION;
       default:
         return null;
     }
   }
-
   
-  console.log(links());
+  console.log(ROUTES);
 
   return (
     <div className={styles.container}>

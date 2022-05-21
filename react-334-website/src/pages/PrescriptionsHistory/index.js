@@ -4,15 +4,18 @@ import SearchBar from '../../components/SearchBar';
 
 import styles from './style.module.css';
 
+import Title from '../../commom-ui/Title';
+import Container from '../../commom-ui/Container'
+
 const PrescriptionHistory = () => {
   console.log('prescription');
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Prescriptions history</h2>
+    <Container>
+      <Title>Prescriptions history</Title>
       <SearchBar placeholder="Prescriptions" />
 
       <PrescriptionCard title="Prescriptions 1" issue="Issued by Dr. Angela Kings 12/1/2023" />
-    </div>
+    </Container>
   );
 }
 

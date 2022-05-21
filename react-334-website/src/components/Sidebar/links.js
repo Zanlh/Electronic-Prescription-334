@@ -1,21 +1,31 @@
+import * as ROUTES from '../../routes/paths';
+
 export const LOGIN_SIGNUP = [
   {
-    path: '/login',
+    path: ROUTES.LOGIN,
     content: 'Login',
   },
   {
-    path: '/signup',
+    path: ROUTES.SIGNUP,
     content: 'Signup'
   }
 ]
 
 export const USER_PRESCRIPTION = [
   {
-    path: '/user-history',
+    path: ROUTES.USER_PRESCRIPTION,
+    content: 'My prescriptions',
+  },
+  {
+    path: ROUTES.PRESCRIPTIONHISTORY,
     content: 'Prescription history',
   },
   {
-    path: '/token',
+    path: ROUTES.USER_TREATMANT,
+    content: 'Treatment plans',
+  },
+  {
+    path: ROUTES.TOKEN,
     content: 'Token',
-  }
+  },
 ]
