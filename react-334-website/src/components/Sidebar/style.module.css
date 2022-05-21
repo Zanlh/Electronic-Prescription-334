@@ -1,0 +1,33 @@
+.container {
+  width: 20%;
+  height: 1080px;
+
+  background-color: #12266D;
+  padding-top: 20px;
+}
+
+.link {
+  width: 70%;
+  margin-left: 20px;
+  padding-left: 20px;
+  display: block;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 42px;
+  border-radius: 10px;
+
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.link:hover {
+  background: #4D6DE0;  
+}
+
+.linkActive {
+  box-shadow: -5px 0 0 0 #4D6DE0; /* Border left */
+}
+
+.linkContent {
+  padding-left: 5px;
+}

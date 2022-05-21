@@ -1,22 +1,21 @@
-import './App.css';
-import Sidebar from './components/Sidebar';
-import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+
+import Sidebar from './components/Sidebar/';
+import { renderRoutes } from './routes';
+import { BrowserRouter } from 'react-router-dom';
+
+// context
+import { UserInfoProvider } from './context/userContext';
+
+import styles from './App.module.css';
 
 function App() {
   return (
-    <>
-    <Router>
-    <div className="App">
-      <h1>
-        334 Prescription
-      </h1>
-      <Sidebar></Sidebar>
-      <Routes>
-        <Route path ='/' exact />
-      </Routes>
-    </div>
-    </Router>
-    </>
+    <BrowserRouter>
+      <div className={styles.container}>
+        <Sidebar />
+          {renderRoutes()}
+      </div>
+    </BrowserRouter>
   );
 }
 

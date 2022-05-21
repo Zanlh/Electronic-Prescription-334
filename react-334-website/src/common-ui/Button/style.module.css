@@ -1,0 +1,22 @@
+.container {
+  width: 127px;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: #12266D;
+  width: 127px;
+  height: 40px;
+  border-radius: 10px;
+  border-style: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.button:focus {
+  cursor: pointer;
+}
