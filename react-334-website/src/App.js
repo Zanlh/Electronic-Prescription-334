@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <div className={styles.container}>
         <Sidebar />
-          {renderRoutes()}
+        {renderRoutes()}
       </div>
     </BrowserRouter>
   );

@@ -1,0 +1,29 @@
+.container {
+  margin-left: 50px;
+  margin-right: 50px;
+  width: 100%;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 47px;
+  margin-top: 40px;
+  color: #12266D;
+}
+
+.token {
+  width: 200px;
+}
+
+.qr {
+  width: 200px;
+  height: 200px;
+}
+
+.text {
+  font-size: 24px;
+  text-align: center;
+
+  color: #12266D;
+}

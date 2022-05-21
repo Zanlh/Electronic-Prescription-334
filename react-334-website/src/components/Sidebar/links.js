@@ -8,3 +8,14 @@ export const LOGIN_SIGNUP = [
     content: 'Signup'
   }
 ]
+
+export const USER_PRESCRIPTION = [
+  {
+    path: '/user-history',
+    content: 'Prescription history',
+  },
+  {
+    path: '/token',
+    content: 'Token',
+  }
+]

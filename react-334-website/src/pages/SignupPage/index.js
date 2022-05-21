@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { apiSignup } from '../../api/auth';
 
 // common ui
-import InputForm from '../../common-ui/InputForm';
-import Button from '../../common-ui/Button';
+import InputForm from '../../commom-ui/InputForm';
+import Button from '../../commom-ui/Button';
 
 // components
 import FormContainer from '../../components/Container/FormContainer';

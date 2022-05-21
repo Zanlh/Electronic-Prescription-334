@@ -3,6 +3,9 @@ import * as ROUTES from './paths';
 import HomePage from '../pages/HomePage';
 import SignupPage from '../pages/SignupPage';
 import LoginPage from '../pages/LoginPage';
+import PrescriptionHistory from '../pages/PrescriptionsHistory';
+import TokenPage from '../pages/TokenPage';
+import Prescription from '../pages/Prescription';
 
 const ROUTES_DETAILS = [
   {
@@ -19,6 +22,21 @@ const ROUTES_DETAILS = [
     path: ROUTES.LOGIN,
     exact: true,
     element: <LoginPage />
+  },
+  {
+    path: ROUTES.PRESCRIPTIONHISTORY,
+    exact: true,
+    element: <PrescriptionHistory />
+  },
+  {
+    path: ROUTES.TOKEN,
+    exact: true,
+    element: <TokenPage />
+  },
+  {
+    path: ROUTES.USER_PRESCRIPTION,
+    exact: true,
+    element: <Prescription />
   }
 ];
 

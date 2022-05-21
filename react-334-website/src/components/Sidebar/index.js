@@ -17,10 +17,16 @@ const Sidebar = (props) => {
       case "/login":
       case "/signup":
         return LINKS.LOGIN_SIGNUP;
+      case "/user-history":
+      case "/token":
+        return LINKS.USER_PRESCRIPTION;
       default:
         return null;
     }
   }
+
+  
+  console.log(links());
 
   return (
     <div className={styles.container}>
