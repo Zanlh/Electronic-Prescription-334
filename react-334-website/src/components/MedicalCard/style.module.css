@@ -1,0 +1,32 @@
+.container {
+  border-radius: 10px;
+  margin-top: 20px;
+
+  background: #FFFFFF;
+  border: 2px solid #12266D;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.heading {
+  background: #12266D;
+  padding: 12.5px 20px;
+  color: #FFF;
+
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-30%);
+  right: 20px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.text {
+  margin: 12.5px 20px;  
+}

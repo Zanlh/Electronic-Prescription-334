@@ -7,6 +7,7 @@ import PrescriptionHistory from '../pages/PrescriptionsHistory';
 import TokenPage from '../pages/TokenPage';
 import Prescription from '../pages/Prescription';
 import TreatmentPlan from '../pages/TreatmentPlan';
+import Medication from '../pages/Medication';
 
 const ROUTES_DETAILS = [
   {
@@ -43,6 +44,11 @@ const ROUTES_DETAILS = [
     path: ROUTES.USER_TREATMANT,
     exact: true,
     element: <TreatmentPlan />
+  },
+  {
+    path: ROUTES.USER_MEDICATION,
+    exact: true,
+    element: <Medication />
   }
 ];
 
