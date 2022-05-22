@@ -1,0 +1,26 @@
+.container {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+
+  color: #FFF;
+  border-radius: 10px;
+  width: 200px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.success {
+  background-color: #008A00;
+}
+
+.error {
+  background-color: #E32B2B;
+}
+
+.text {
+  margin-left: 10px;
+}

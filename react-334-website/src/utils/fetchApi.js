@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+const prefixUrl = "http://electronic-prescription-system.herokuapp.com/api";
+
 export const get = async (url, headers = {}) => {
   try {
-    const { data } = await axios.get(url, {
+    console.log(prefixUrl + url);
+    const { data } = await axios.get(prefixUrl + url, {
       headers: {
         ...headers,
       },
@@ -16,7 +19,7 @@ export const get = async (url, headers = {}) => {
 
 export const post = async (url, body, headers = {}) => {
   try {
-    const { data } = await axios.post(url, body, {
+    const { data } = await axios.post(prefixUrl + url, body, {
       headers: {
         ...headers,
       },

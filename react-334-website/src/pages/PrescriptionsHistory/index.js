@@ -5,6 +5,9 @@ import SearchBar from '../../components/SearchBar';
 import Title from '../../commom-ui/Title';
 import Container from '../../commom-ui/Container'
 
+// hoc  
+import statusWrapper from '../../hoc/statusWrapper';
+
 const PrescriptionHistory = () => {
   console.log('prescription');
   return (
@@ -17,4 +20,4 @@ const PrescriptionHistory = () => {
   );
 }
 
-export default PrescriptionHistory;
+export default statusWrapper(PrescriptionHistory);

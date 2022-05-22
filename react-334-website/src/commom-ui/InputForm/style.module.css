@@ -7,18 +7,41 @@
   justify-content: space-between;
 }
 
+
+.text-user {
+  color: #12266D;
+}
+
+.text-phar {
+  color: #003300;
+}
+
+.text-doctor {
+  color: #5F0C0C;
+}
+
 .label {
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
-
-  color: #12266D;
 }
 
-.textArea {
+.textArea-user {
   width: 400px;
   border: 1px solid #12266D;
+  height: 20px;
+}
+
+.textArea-phar {
+  width: 400px;
+  border: 1px solid #003300;
+  height: 20px;
+}
+
+.textArea-doctor {
+  width: 400px;
+  border: 1px solid #5F0C0C;
   height: 20px;
 }
 

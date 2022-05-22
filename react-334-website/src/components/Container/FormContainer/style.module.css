@@ -8,11 +8,22 @@
 }
 
 .header {
-  background-color: #12266D;
   margin-bottom: 20px;  
   height: 40px;
   display: flex;
   align-items: center;
+}
+
+.user {
+  background-color: #12266D;
+}
+
+.phar {
+  background-color: #003300;
+}
+
+.doctor {
+  background-color: #5F0C0C;
 }
 
 .headerContent {

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // api
-import { apiSignup } from '../../api/auth';
+import { apiUserSignup } from '../../api/auth';
 
 // common ui
 import InputForm from '../../commom-ui/InputForm';
@@ -9,6 +9,9 @@ import Button from '../../commom-ui/Button';
 
 // components
 import FormContainer from '../../components/Container/FormContainer';
+
+// hoc  
+import statusWrapper from '../../hoc/statusWrapper';
 
 const labels = {
   fullname: 'Fullname',
@@ -38,7 +41,7 @@ const SignupPage = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const { result, message, data } = await apiSignup({ name: info.fullname, password: info.password, email: info.email });
+    const { result, message, data } = await apiUserSignup({ name: info.fullname, password: info.password, email: info.email });
 
     console.log(result, message, data);
   }
@@ -54,4 +57,4 @@ const SignupPage = () => {
   );
 }
 
-export default SignupPage;
+export default statusWrapper(SignupPage);

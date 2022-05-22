@@ -8,6 +8,10 @@ import Title from '../../commom-ui/Title';
 import Container from '../../commom-ui/Container'
 
 import TokenImage from '../../img/token.png'
+
+// hoc  
+import statusWrapper from '../../hoc/statusWrapper';
+
 const TokenPage = () => {
   return (
     <Container>
@@ -23,4 +27,4 @@ const TokenPage = () => {
   ); 
 }
 
-export default TokenPage;
+export default statusWrapper(TokenPage);

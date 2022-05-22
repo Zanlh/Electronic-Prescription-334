@@ -2,8 +2,6 @@
   width: 20%;
   min-width: 350px;
   height: 100vh;
-
-  background-color: #12266D;
   padding-top: 20px;
 
   display: flex;
@@ -26,12 +24,28 @@
   text-decoration: none;
 }
 
-.link:hover {
+.link-user:hover {
   background: #4D6DE0;  
 }
 
-.linkActive {
+.linkActive-user {
   box-shadow: -5px 0 0 0 #4D6DE0;
+}
+
+.link-phar:hover {
+  background: #008A00;  
+}
+
+.linkActive-phar {
+  box-shadow: -5px 0 0 0 #008A00;
+}
+
+.link-doctor:hover {
+  background: #E32B2B;  
+}
+
+.linkActive-doctor {
+  box-shadow: -5px 0 0 0 #E32B2B;
 }
 
 .linkContent {
@@ -52,10 +66,34 @@
   cursor: pointer;
 }
 
-.name {
+.name-user,
+.name-phar,
+.name-doctor {
   padding-left: 30px;
 }
 
-.name:hover {
+.name-user:hover {
   background: #12266D;
 }
+
+.name-phar:hover {
+  background: #003300;
+}
+
+.name-doctor:hover {
+  background: #5F0C0C;
+}
+
+.user {
+  background: #12266D;
+}
+
+
+.phar {
+  background: #003300;
+}
+
+.doctor {
+  background: #5F0C0C;
+}
+

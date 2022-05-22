@@ -5,6 +5,9 @@ import Container from '../../commom-ui/Container';
 
 import PrescriptionTable from '../../components/PrescriptionTable';
 
+// hoc  
+import statusWrapper from '../../hoc/statusWrapper';
+
 const PrescriptionDetail = (props) => {
   return (
     <Container>
@@ -15,4 +18,4 @@ const PrescriptionDetail = (props) => {
   );
 }
 
-export default PrescriptionDetail;
+export default statusWrapper(PrescriptionDetail);

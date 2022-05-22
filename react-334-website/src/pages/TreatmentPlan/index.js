@@ -7,6 +7,9 @@ import Container from '../../commom-ui/Container'
 
 import MedicalCard from '../../components/MedicalCard';
 
+// hoc  
+import statusWrapper from '../../hoc/statusWrapper';
+
 const TreatmentPlan = () => {
   return (
     <Container>
@@ -18,4 +21,4 @@ const TreatmentPlan = () => {
   );
 }
 
-export default TreatmentPlan;
+export default statusWrapper(TreatmentPlan);

@@ -7,6 +7,7 @@ const USER_INFO_STORAGE = 'user-info';
 const DEFAULT_USER_INFO = {
   email: '',
   fullname: '',
+  role: '',
   token: null,
 };
 
@@ -17,12 +18,16 @@ export const UserInfoContext = React.createContext({
 });
 
 export function UserInfoProvider(props) {
-  const [userInfo, setUserInfo] = useState(DEFAULT_USER_INFO);
+  const [userInfo, setUserInfo] = useState(() => {
+    const userInfoStorage = JSON.parse(localStorage.getItem(USER_INFO_STORAGE));
+    return userInfoStorage || DEFAULT_USER_INFO;
+  });
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log('context', userInfo);
+  console.log('context', userInfo, isLoaded);
 
   const getUserInfo = async () => {
+    console.log(userInfo);
     const { result, data } = await apiGetUserInfo({ token: userInfo.token });
     if (result === "1" && data) {
       setUserInfo({
@@ -31,25 +36,33 @@ export function UserInfoProvider(props) {
         email: data.email || userInfo.email,
       });
     } else {
-      setUserInfo({ ...DEFAULT_USER_INFO });
+      console.log('fetch', userInfo);
+      setUserInfo({ ...userInfo });
     }
   };
 
   useEffect(() => {
-    console.log(userInfo);
     if (isLoaded) {
       if (userInfo?.token) {
         getUserInfo();
+      } else {
+        setUserInfo({ ...userInfo });
       }
     }
-  }, [userInfo.token]);
+  }, [userInfo.token, isLoaded]);
+
+  useEffect(() => {
+    const userInfoStorage = JSON.parse(localStorage.getItem(USER_INFO_STORAGE));
+    if (userInfoStorage?.role) {
+      setUserInfo({ ...userInfo, role: userInfoStorage.role });
+    }
+  }, []);
 
   useEffect(() => {
     const userInfoStorage = JSON.parse(localStorage.getItem(USER_INFO_STORAGE));
     if (userInfoStorage?.token) {
       setUserInfo({ ...userInfo, token: userInfoStorage.token });
     }
-
     setIsLoaded(true);
   }, []);
 
@@ -70,6 +83,7 @@ export function UserInfoProvider(props) {
         return { ...userInfo, ...info }
       }),
       clearUserInfo,
+      getUserInfo,
      }}
     >
       {props.children}
