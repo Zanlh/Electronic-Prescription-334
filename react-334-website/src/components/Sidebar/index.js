@@ -14,19 +14,11 @@ import { useLocation } from 'react-router-dom';
 const Sidebar = (props) => {
   const { pathname } = useLocation();
   console.log('path', pathname);
+  console.log(ROUTES.USER_PRESCRIPTION_DETAIL);
   const links = () => {
-    switch (pathname) {
-      case ROUTES.LOGIN:
-      case ROUTES.SIGNUP:
-        return LINKS.LOGIN_SIGNUP;
-      case ROUTES.PRESCRIPTIONHISTORY:
-      case ROUTES.TOKEN:
-      case ROUTES.USER_PRESCRIPTION:
-      case ROUTES.USER_TREATMANT:
-        return LINKS.USER_PRESCRIPTION;
-      default:
-        return null;
-    }
+    if (pathname === ROUTES.LOGIN || pathname === ROUTES.SIGNUP) return LINKS.LOGIN_SIGNUP;
+    if (pathname.includes('user')) return LINKS.USER_PRESCRIPTION;
+    return null;
   }
   
   console.log(ROUTES);

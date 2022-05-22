@@ -1,0 +1,45 @@
+.table {
+  border: none;
+  width: 100%;
+
+  justify-content: center;
+  text-align: center;
+  background: #FFFFFF;
+  border: 2px solid #12266D;
+  border-radius: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.heading {
+  background: #12266D;
+  color: #FFF;
+}
+
+tr:not(:last-child) td {
+  border-bottom: 1px solid #12266D;
+}
+
+.name {
+  width: 10%;
+}
+
+.dod {
+  width: 15%;
+}
+
+.dosage {
+  width: 15%;
+}
+
+.quantity {
+  width: 10%;
+}
+
+.advice {
+  width: 25%;
+}
+
+.reaction {
+  width: 25%;
+}

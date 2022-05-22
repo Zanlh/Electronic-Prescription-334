@@ -25,7 +25,15 @@ export const USER_PRESCRIPTION = [
     content: 'Treatment plans',
   },
   {
+    path: ROUTES.USER_MEDICATION,
+    content: 'Medications',
+  },
+  {
     path: ROUTES.TOKEN,
     content: 'Token',
   },
+  {
+    path: ROUTES.USER_SETTINGS,
+    content: 'Settings',
+  }
 ]

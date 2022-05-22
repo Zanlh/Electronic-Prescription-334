@@ -8,6 +8,8 @@ import TokenPage from '../pages/TokenPage';
 import Prescription from '../pages/Prescription';
 import TreatmentPlan from '../pages/TreatmentPlan';
 import Medication from '../pages/Medication';
+import PrescriptionDetail from '../pages/PrescriptionDetail';
+import SETTINGS from '../pages/Settings';
 
 const ROUTES_DETAILS = [
   {
@@ -49,6 +51,16 @@ const ROUTES_DETAILS = [
     path: ROUTES.USER_MEDICATION,
     exact: true,
     element: <Medication />
+  },
+  {
+    path: ROUTES.USER_PRESCRIPTION_DETAIL,
+    exact: true,
+    element: <PrescriptionDetail />
+  },
+  {
+    path: ROUTES.USER_SETTINGS,
+    exact: true,
+    element: <SETTINGS />
   }
 ];
 

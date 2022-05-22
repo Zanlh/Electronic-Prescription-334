@@ -2,8 +2,6 @@ import React from 'react';
 import PrescriptionCard from '../../components/PrescriptionCard';
 import SearchBar from '../../components/SearchBar';
 
-import styles from './style.module.css';
-
 import Title from '../../commom-ui/Title';
 import Container from '../../commom-ui/Container'
 

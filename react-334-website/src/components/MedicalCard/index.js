@@ -7,7 +7,7 @@ import * as DropBox from '../../commom-ui/DropBoxIcon';
 const MedicalCard = (props) => {
   const { title } = props;
 
-  const [drop, setDrop] = useState(0);
+  const [drop, setDrop] = useState(1);
 
   const changeDropBox = () => {
     console.log(drop);
@@ -29,6 +29,7 @@ const MedicalCard = (props) => {
           } 
         </div>
       </div>
+
       {drop === 0 && (
         <div className={styles.text}>
           Medication 2
