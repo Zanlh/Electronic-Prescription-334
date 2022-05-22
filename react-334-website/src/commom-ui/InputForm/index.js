@@ -4,8 +4,6 @@ import styles from './style.module.css';
 
 const InputForm = (props) => {
   const { label, type, id, value, onChange, error } = props;
-  console.log(props);
-  console.log(styles);
   return (
     <div className={styles.container}>
       <label className={styles.label}>{label}</label>

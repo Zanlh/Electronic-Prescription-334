@@ -1,10 +1,15 @@
 .container {
   width: 20%;
   min-width: 350px;
-  height: 1080px;
+  height: 100vh;
 
   background-color: #12266D;
   padding-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
 }
 
 .link {
@@ -26,9 +31,31 @@
 }
 
 .linkActive {
-  box-shadow: -5px 0 0 0 #4D6DE0; /* Border left */
+  box-shadow: -5px 0 0 0 #4D6DE0;
 }
 
 .linkContent {
   padding-left: 5px;
+}
+
+.logout {
+  padding: 0;
+  border: none;
+  background: none;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.logout:hover {
+  cursor: pointer;
+}
+
+.name {
+  padding-left: 30px;
+}
+
+.name:hover {
+  background: #12266D;
 }

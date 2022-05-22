@@ -11,7 +11,7 @@ import Button from '../../commom-ui/Button';
 import FormContainer from '../../components/Container/FormContainer';
 
 // context
-import { userInfoContext } from '../../context/userContext';
+import { UserInfoContext } from '../../context/userContext';
 
 const labels = {
   password: 'Password',
@@ -22,10 +22,9 @@ const LoginPage = ({ history }) => {
   const [info, setInfo] = useState({});
 
   const [errors, setErrors] = useState({});
+  const [progress, setProgress] = useState(0);
 
-  const { userInfo, setUserInfo } = useContext(userInfoContext);
-
-  console.log(info);
+  const { userInfo, setUserInfo } = useContext(UserInfoContext);
 
   const onInputChange = (e) => {
     const { id, value } = e.target;
@@ -46,12 +45,19 @@ const LoginPage = ({ history }) => {
 
     const { result, message, data} = await apiLogin({ password: info.password, email: info.email });
 
+    if (result !== "1" || !data || !data.token) {
+      setProgress(1);
+    } else {
+      setProgress(2);
+      console.log(result, message, data);
+      setUserInfo({ token: data.token, isFetch: false });
+      console.log('login', data);
+    }
     
-    console.log(userInfo);
     // history.push('/');
   }
 
-  console.log(userInfo);
+  if (userInfo?.email) console.log('userInfo', userInfo.email);
   
   return (
     <FormContainer headerContent="Register">

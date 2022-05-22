@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 // api
 import { apiSignup } from '../../api/auth';
@@ -20,8 +20,6 @@ const SignupPage = () => {
   const [info, setInfo] = useState({});
 
   const [errors, setErrors] = useState({});
-
-  console.log(info);
 
   const onInputChange = (e) => {
     const { id, value } = e.target;

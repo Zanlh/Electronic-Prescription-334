@@ -10,12 +10,15 @@ import styles from './App.module.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className={styles.container}>
-        <Sidebar />
-        {renderRoutes()}
-      </div>
-    </BrowserRouter>
+    <UserInfoProvider>
+      <BrowserRouter>
+        <div className={styles.container}>
+          <Sidebar />
+          {renderRoutes()}
+        </div>
+      </BrowserRouter>
+    </UserInfoProvider>
+    
   );
 }
 
