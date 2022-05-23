@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // api
-import { apiUserLogin, apiDoctorLogin } from '../../api/auth';
+import { apiUserLogin, apiDoctorLogin, apiPharLogin } from '../../api/auth';
 
 // common ui
 import InputForm from '../../commom-ui/InputForm';
@@ -50,7 +50,8 @@ const LoginPage = ({ navigation }) => {
 
   const fetchLogin = async ({ email, password }) => {
     if (userInfo.role === 'user') return await apiUserLogin({ password, email });
-    return await apiDoctorLogin({ password, email });
+    if (userInfo.role === 'doctor') return await apiDoctorLogin({ password, email });
+    return await apiPharLogin({ password, email });
   }
 
   const onSubmitHandler = async (e) => {
@@ -67,7 +68,8 @@ const LoginPage = ({ navigation }) => {
       console.log('login', data);
 
       if (userInfo.role === 'user') navigation('/user-prescriptions');
-      else navigation('/doctor-find');
+      else if (userInfo.role === 'doctor') navigation('/doctor-find');
+      else navigation('/phar-prescription');
     }
   }
   

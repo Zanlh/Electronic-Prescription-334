@@ -13,3 +13,5 @@ export const DOCTOR_FIND = '/doctor-find';
 export const DOCTOR_PRESCRIPTION = '/doctor-prescription';
 export const DOCTOR_MEDICATION = '/doctor-medications';
 export const DOCTOR_TREATMENT = '/doctor-treatment';
+
+export const PHAR_PRESCRIPTION = '/phar-prescription';

@@ -48,3 +48,17 @@ export function apiGetDoctorPrescriptions({ token, id }) {
     'Access-Control-Allow-Headers': '*',
   })
 }
+
+export function apiGetPharIssues({ token }) {
+  return get('/pharmacy-issue', {
+    Authorization: `Bearer ${token}`,
+    'Access-Control-Allow-Headers': '*',
+  });
+}
+
+export function apiGetPharPrescriptions({ token, id }) {
+  return get(`/user-prescription/${id}`, {
+    Authorization: `Bearer ${token}`,
+    'Access-Control-Allow-Headers': '*',
+  })
+}

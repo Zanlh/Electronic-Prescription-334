@@ -51,3 +51,10 @@ export const DOCTOR_PRESCRIPTION = [
     content: 'Treatment plans',
   }
 ]
+
+export const PHAR_PRESCRIPTION = [
+  {
+    path: ROUTES.PHAR_PRESCRIPTION,
+    content: 'Prescription',
+  }
+]

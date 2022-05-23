@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { apiGetUserInfo, apiGetDoctorInfo } from '../api/'; 
+import { apiGetUserInfo, apiGetDoctorInfo, apiGetPharInfo } from '../api/'; 
 
 const USER_INFO_STORAGE = 'user-info';
 
@@ -28,7 +28,8 @@ export function UserInfoProvider(props) {
 
   const getInfo = async (token) => {
     if (userInfo.role === 'user') return await apiGetUserInfo({ token });
-    return await apiGetDoctorInfo({ token });
+    if (userInfo.role === 'doctor') return await apiGetDoctorInfo({ token });
+    return await apiGetPharInfo({ token });
   }
 
   const getUserInfo = async () => {

@@ -14,9 +14,17 @@ export function apiGetDoctorInfo({ token }) {
   })
 }
 
+export function apiGetPharInfo({ token }) {
+  return post('/pharmacy-profile', {}, {
+    Authorization: `Bearer ${token}`,
+    'Access-Control-Allow-Headers': '*',
+  });
+}
+
 export function apiGetUsers({ token }) {
   return get('/users', {
     Authorization: `Bearer ${token}`,
     'Access-Control-Allow-Headers': '*',
   })
 }
+

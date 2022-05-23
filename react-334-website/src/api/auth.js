@@ -36,3 +36,11 @@ export function apiPharLogin({ email, password }) {
     password,
   })
 }
+
+export function apiPharSignup({ email, password, name }) {
+  return post('/pharmacy-register', {
+    name,
+    email,
+    password
+  })
+}

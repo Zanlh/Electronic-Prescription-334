@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // api
-import { apiUserSignup, apiDoctorSignup } from '../../api/auth';
+import { apiUserSignup, apiDoctorSignup, apiPharSignup } from '../../api/auth';
 
 // common ui
 import InputForm from '../../commom-ui/InputForm';
@@ -43,7 +43,8 @@ const SignupPage = () => {
 
   const fetchSignup = async ({ fullname: name, email, password }) => {
     if (userInfo.role === 'user') return await apiUserSignup({ name, password, email });
-    return await apiDoctorSignup({ name, password, email });
+    if (userInfo.role === 'doctor') return await apiDoctorSignup({ name, password, email });
+    return await apiPharSignup({ name, password, email });
   }
 
   const onSubmitHandler = async (e) => {

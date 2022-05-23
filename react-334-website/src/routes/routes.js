@@ -9,7 +9,7 @@ import TreatmentPlan from '../pages/TreatmentPlan';
 import Medication from '../pages/Medication';
 import PrescriptionDetail from '../pages/PrescriptionDetail';
 
-import FindUser from '../pages/FindUser';
+import Find from '../pages/Find';
 
 const ROUTES_DETAILS = [
   {
@@ -55,7 +55,7 @@ const ROUTES_DETAILS = [
   {
     path: ROUTES.DOCTOR_FIND,
     exact: true,
-    element: <FindUser />
+    element: <Find />
   },
   {
     path: ROUTES.DOCTOR_PRESCRIPTION,
@@ -71,6 +71,11 @@ const ROUTES_DETAILS = [
     path: ROUTES.DOCTOR_TREATMENT,
     exact: true,
     element: <TreatmentPlan />
+  },
+  {
+    path: ROUTES.PHAR_PRESCRIPTION,
+    exact: true,
+    element: <Prescription />
   }
 ];
 

@@ -19,8 +19,11 @@ const Sidebar = (props) => {
   const renderLinks = () => {
     if (pathname === ROUTES.LOGIN || pathname === ROUTES.SIGNUP) return LINKS.LOGIN_SIGNUP;
     if (pathname.includes('user')) return LINKS.USER_PRESCRIPTION;
+
     if (pathname === ROUTES.DOCTOR_FIND) return LINKS.DOCTOR_FIND;
     if (pathname.includes('doctor')) return LINKS.DOCTOR_PRESCRIPTION;
+
+    if (pathname.includes('phar')) return LINKS.PHAR_PRESCRIPTION;
     return null;
   }
 

@@ -3,7 +3,7 @@ import cx from 'classnames';
 import styles from './style.module.css';
 import { UserInfoContext } from '../../context/userContext';
 
-import { apiGetUserPrescriptions, apiGetDoctorPrescriptions } from '../../api';
+import { apiGetUserPrescriptions, apiGetDoctorPrescriptions, apiGetPharPrescriptions } from '../../api';
 
 const PrescriptionTable = (props) => {
   const { id, classes, heading, data, type } = props;
@@ -16,7 +16,8 @@ const PrescriptionTable = (props) => {
 
   const getPrescription = async ({ token, id }) => {
     if (userInfo.role === 'user') return await apiGetUserPrescriptions({ token, id });
-    else if (userInfo.role === 'doctor') return await apiGetDoctorPrescriptions({ token, id });
+    if (userInfo.role === 'doctor') return await apiGetDoctorPrescriptions({ token, id });
+    return await apiGetPharPrescriptions({ token, id });
   }
 
   useEffect(() => {
