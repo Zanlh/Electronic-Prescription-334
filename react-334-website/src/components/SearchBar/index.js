@@ -8,7 +8,10 @@ const SearchBar = (props) => {
   return (
     <div className={styles.container}>
       <SearchIcon />
-      <input className={styles.search} placeholder={`Find my ${props.placeholder}`} />
+      <input 
+        className={styles.search} 
+        placeholder={`Find my ${props.placeholder}`} 
+      />
     </div>
   );
 }

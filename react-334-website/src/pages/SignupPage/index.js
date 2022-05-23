@@ -25,12 +25,12 @@ const SignupPage = () => {
   const { userInfo } = useContext(UserInfoContext);
   const [info, setInfo] = useState({});
 
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
 
   const onInputChange = (e) => {
     const { id, value } = e.target;
     setInfo({ ...info, [id] : value});
-    setErrors({ ...errors, [id]: null });
+    // setErrors({ ...errors, [id]: null });
   }
 
   const DefaultProps = (name) => ({
@@ -38,7 +38,7 @@ const SignupPage = () => {
     label: labels[name],
     value: info[name],
     onChange: onInputChange,
-    error: errors[name],
+    // error: errors[name],
   });
 
   const fetchSignup = async ({ fullname: name, email, password }) => {

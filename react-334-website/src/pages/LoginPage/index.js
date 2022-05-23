@@ -55,8 +55,7 @@ const LoginPage = ({ navigation }) => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
-    
+  
     const { result, message, data} = await fetchLogin({ ...info });
 
     if (result !== "1" || !data || !data.token) {
@@ -67,7 +66,8 @@ const LoginPage = ({ navigation }) => {
       setUserInfo({ token: data.token });
       console.log('login', data);
 
-      navigation('/user-prescriptions');
+      if (userInfo.role === 'user') navigation('/user-prescriptions');
+      else navigation('/doctor-find');
     }
   }
   

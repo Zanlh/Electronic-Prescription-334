@@ -14,30 +14,6 @@
   color: #FFF;
 }
 
-.name {
-  width: 10%;
-}
-
-.dod {
-  width: 15%;
-}
-
-.dosage {
-  width: 15%;
-}
-
-.quantity {
-  width: 10%;
-}
-
-.advice {
-  width: 25%;
-}
-
-.reaction {
-  width: 25%;
-}
-
 /* user */
 .table-border-user {
   border: 2px solid #12266D;

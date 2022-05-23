@@ -3,12 +3,13 @@ import * as ROUTES from './paths';
 import HomePage from '../pages/HomePage';
 import SignupPage from '../pages/SignupPage';
 import LoginPage from '../pages/LoginPage';
-import PrescriptionHistory from '../pages/PrescriptionsHistory';
 import TokenPage from '../pages/TokenPage';
 import Prescription from '../pages/Prescription';
 import TreatmentPlan from '../pages/TreatmentPlan';
 import Medication from '../pages/Medication';
 import PrescriptionDetail from '../pages/PrescriptionDetail';
+
+import FindUser from '../pages/FindUser';
 
 const ROUTES_DETAILS = [
   {
@@ -25,11 +26,6 @@ const ROUTES_DETAILS = [
     path: ROUTES.LOGIN,
     exact: true,
     element: <LoginPage />
-  },
-  {
-    path: ROUTES.PRESCRIPTIONHISTORY,
-    exact: true,
-    element: <PrescriptionHistory />
   },
   {
     path: ROUTES.TOKEN,
@@ -57,9 +53,24 @@ const ROUTES_DETAILS = [
     element: <PrescriptionDetail />
   },
   {
-    path: ROUTES.USER_HISTORY_DETAIL,
+    path: ROUTES.DOCTOR_FIND,
     exact: true,
-    element: <PrescriptionDetail />
+    element: <FindUser />
+  },
+  {
+    path: ROUTES.DOCTOR_PRESCRIPTION,
+    exact: true,
+    element: <Prescription />
+  },
+  {
+    path: ROUTES.DOCTOR_MEDICATION,
+    exact: true,
+    element: <Medication />
+  },
+  {
+    path: ROUTES.DOCTOR_TREATMENT,
+    exact: true,
+    element: <TreatmentPlan />
   }
 ];
 

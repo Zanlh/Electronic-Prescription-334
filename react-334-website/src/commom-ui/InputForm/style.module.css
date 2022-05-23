@@ -31,18 +31,25 @@
   width: 400px;
   border: 1px solid #12266D;
   height: 20px;
+  overflow-wrap: break-word;
 }
 
 .textArea-phar {
   width: 400px;
   border: 1px solid #003300;
   height: 20px;
+  overflow-wrap: break-word;
 }
 
 .textArea-doctor {
   width: 400px;
   border: 1px solid #5F0C0C;
   height: 20px;
+  overflow-wrap: break-word;
+}
+
+.bigArea {
+  height: 100px;
 }
 
 .error {

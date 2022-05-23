@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { apiGetUserInfo } from '../api/'; 
+import { apiGetUserInfo, apiGetDoctorInfo } from '../api/'; 
 
 const USER_INFO_STORAGE = 'user-info';
 
@@ -26,9 +26,14 @@ export function UserInfoProvider(props) {
 
   console.log('context', userInfo, isLoaded);
 
+  const getInfo = async (token) => {
+    if (userInfo.role === 'user') return await apiGetUserInfo({ token });
+    return await apiGetDoctorInfo({ token });
+  }
+
   const getUserInfo = async () => {
     console.log(userInfo);
-    const { result, data } = await apiGetUserInfo({ token: userInfo.token });
+    const { result, data } = await getInfo(userInfo.token);
     if (result === "1" && data) {
       setUserInfo({
         ...userInfo,
@@ -36,7 +41,7 @@ export function UserInfoProvider(props) {
         email: data.email || userInfo.email,
       });
     } else {
-      console.log('fetch', userInfo);
+      // console.log('fetch', userInfo);
       setUserInfo({ ...userInfo });
     }
   };

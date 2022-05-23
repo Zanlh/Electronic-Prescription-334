@@ -10,13 +10,13 @@ const MedicalCard = (props) => {
   const { title } = props;
   const { userInfo } = useContext(UserInfoContext);
 
-  const [drop, setDrop] = useState(1);
+  const [drop, setDrop] = useState(props.drop ? props.drop : 0);
 
   const changeDropBox = () => {
     console.log(drop);
     if (drop <= 1) setDrop(1 - drop);
     else {
-      // TODO
+      props.onClose();
     }
   }
 
@@ -33,9 +33,9 @@ const MedicalCard = (props) => {
         </div>
       </div>
 
-      {drop === 0 && (
+      {drop !== 0 && (
         <div className={styles.text}>
-          Medication 2
+          {props.children}
         </div>
       )}
     </div>

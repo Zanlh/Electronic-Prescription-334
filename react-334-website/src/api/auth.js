@@ -29,3 +29,10 @@ export function apiDoctorSignup({ name, email, password }) {
     password
   })
 }
+
+export function apiPharLogin({ email, password }) {
+  return post('/pharmacy-login', {
+    email,
+    password,
+  })
+}

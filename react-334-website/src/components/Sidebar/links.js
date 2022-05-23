@@ -17,10 +17,6 @@ export const USER_PRESCRIPTION = [
     content: 'My prescriptions',
   },
   {
-    path: ROUTES.PRESCRIPTIONHISTORY,
-    content: 'Prescription history',
-  },
-  {
     path: ROUTES.USER_TREATMANT,
     content: 'Treatment plans',
   },
@@ -32,4 +28,26 @@ export const USER_PRESCRIPTION = [
     path: ROUTES.TOKEN,
     content: 'Token',
   },
+]
+
+export const DOCTOR_FIND = [
+  {
+    path: ROUTES.DOCTOR_FIND,
+    content: 'Find patient',
+  }
+]
+
+export const DOCTOR_PRESCRIPTION = [
+  {
+    path: ROUTES.DOCTOR_PRESCRIPTION,
+    content: 'Prescription',
+  },
+  {
+    path: ROUTES.DOCTOR_MEDICATION,
+    content: 'Medication',
+  },
+  {
+    path: ROUTES.DOCTOR_TREATMENT,
+    content: 'Treatment plans',
+  }
 ]
