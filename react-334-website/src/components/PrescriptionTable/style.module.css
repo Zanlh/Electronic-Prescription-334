@@ -5,19 +5,13 @@
   justify-content: center;
   text-align: center;
   background: #FFFFFF;
-  border: 2px solid #12266D;
   border-radius: 10px;
   margin-top: 20px;
   overflow: hidden;
 }
 
 .heading {
-  background: #12266D;
   color: #FFF;
-}
-
-tr:not(:last-child) td {
-  border-bottom: 1px solid #12266D;
 }
 
 .name {
@@ -42,4 +36,44 @@ tr:not(:last-child) td {
 
 .reaction {
   width: 25%;
+}
+
+/* user */
+.table-border-user {
+  border: 2px solid #12266D;
+}
+
+.heading-user {
+  background: #12266D;
+}
+
+.tr-user:not(:last-child) td {
+  border-bottom: 1px solid #12266D;
+}
+
+/* phar */
+.table-border-phar {
+  border: 2px solid #003300;
+}
+
+.heading-phar {
+  background: #003300;
+}
+
+.tr-phar:not(:last-child) td {
+  border-bottom: 1px solid #003300;
+}
+
+/* doctor */
+
+.table-border-doctor {
+  border: 2px solid #5F0C0C;
+}
+
+.heading-doctor {
+  background: #5F0C0C;
+}
+
+.tr-doctor:not(:last-child) td {
+  border-bottom: 1px solid #5F0C0C;
 }

@@ -9,7 +9,6 @@ import Prescription from '../pages/Prescription';
 import TreatmentPlan from '../pages/TreatmentPlan';
 import Medication from '../pages/Medication';
 import PrescriptionDetail from '../pages/PrescriptionDetail';
-import SETTINGS from '../pages/Settings';
 
 const ROUTES_DETAILS = [
   {
@@ -58,9 +57,9 @@ const ROUTES_DETAILS = [
     element: <PrescriptionDetail />
   },
   {
-    path: ROUTES.USER_SETTINGS,
+    path: ROUTES.USER_HISTORY_DETAIL,
     exact: true,
-    element: <SETTINGS />
+    element: <PrescriptionDetail />
   }
 ];
 

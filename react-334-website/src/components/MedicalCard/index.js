@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
+import cx from 'classnames';
 import styles from './style.module.css';
 
 import * as DropBox from '../../commom-ui/DropBoxIcon';
 
+import { UserInfoContext } from '../../context/userContext';
+
 const MedicalCard = (props) => {
   const { title } = props;
+  const { userInfo } = useContext(UserInfoContext);
 
   const [drop, setDrop] = useState(1);
 
@@ -18,8 +21,8 @@ const MedicalCard = (props) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.heading}>
+    <div className={cx(styles.container, styles[`border-${userInfo.role}`])}>
+      <div className={cx(styles.heading, styles[`heading-${userInfo.role}`])}>
         <span>{title}</span>
         <div className={styles.icon} onClick={changeDropBox}>
           {

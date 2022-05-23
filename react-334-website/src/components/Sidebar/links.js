@@ -32,8 +32,4 @@ export const USER_PRESCRIPTION = [
     path: ROUTES.TOKEN,
     content: 'Token',
   },
-  {
-    path: ROUTES.USER_SETTINGS,
-    content: 'Settings',
-  }
 ]

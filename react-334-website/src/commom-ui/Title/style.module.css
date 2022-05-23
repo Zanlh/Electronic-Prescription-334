@@ -3,5 +3,16 @@
   font-size: 36px;
   line-height: 47px;
   margin-top: 40px;
+}
+
+.title-user {
   color: #12266D;
+}
+
+.title-phar {
+  color: #003300;
+}
+
+.title-doctor {
+  color: #5F0C0C;
 }

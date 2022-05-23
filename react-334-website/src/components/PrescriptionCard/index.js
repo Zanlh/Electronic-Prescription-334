@@ -1,16 +1,24 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import cx from 'classnames';
 import styles from './style.module.css';
 
-import RightArrow from '../../commom-ui/RightArrow';
+import { RightArrow } from '../../commom-ui/Arrow';
+import { UserInfoContext } from '../../context/userContext';
+
+const COLOR = {
+  user: '#12266D',
+  phar: '#003300',
+  doctor: '#5F0C0C',
+};
 
 const PrescriptionCard = (props) => {
+  const { userInfo } = useContext(UserInfoContext);
   const { title, issue } = props;
   return (
-    <div className={styles.container}>
+    <div className={cx(styles.container, styles[`border-${userInfo.role}`])}>
       <div className={styles.titleContainer}>
-        <div className={styles.title}>{title}</div>      
-        <div className={styles.issue}>{issue}</div>
+        <div className={cx(styles.title, styles[`title-${userInfo.role}`])}>{title}</div>      
+        <div className={cx(styles.issue, styles[`issue-${userInfo.role}`])}>{issue}</div>
       </div>
 
       <div className={styles.info}>
@@ -30,7 +38,7 @@ const PrescriptionCard = (props) => {
       </div>
 
       <div className={styles.button}>
-        <RightArrow />
+        <RightArrow color={COLOR[userInfo.role]}/>
       </div>
     </div>
   );
