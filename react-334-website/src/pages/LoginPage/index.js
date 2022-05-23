@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // api
-import { apiUserLogin } from '../../api/auth';
+import { apiUserLogin, apiDoctorLogin } from '../../api/auth';
 
 // common ui
 import InputForm from '../../commom-ui/InputForm';
@@ -48,17 +48,23 @@ const LoginPage = ({ navigation }) => {
     error: errors[name],
   });
 
+  const fetchLogin = async ({ email, password }) => {
+    if (userInfo.role === 'user') return await apiUserLogin({ password, email });
+    return await apiDoctorLogin({ password, email });
+  }
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const { result, message, data} = await apiUserLogin({ password: info.password, email: info.email });
+    
+    const { result, message, data} = await fetchLogin({ ...info });
 
     if (result !== "1" || !data || !data.token) {
       setProgress(1);
     } else {
       setProgress(2);
       console.log(result, message, data);
-      setUserInfo({ token: data.token, isFetch: false });
+      setUserInfo({ token: data.token });
       console.log('login', data);
 
       navigation('/user-prescriptions');
@@ -70,7 +76,7 @@ const LoginPage = ({ navigation }) => {
       <InputForm { ...DefaultProps('email') } type="text" />
       <InputForm { ...DefaultProps('password') } type="password" />
 
-      <Button onClick={onSubmitHandler}>Login</Button>
+      <Button type="primary" onClick={onSubmitHandler}>Login</Button>
 
       <Popup type="error" />
     </FormContainer>

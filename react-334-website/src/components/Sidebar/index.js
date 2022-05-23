@@ -15,7 +15,6 @@ import { UserInfoContext } from '../../context/userContext';
 const Sidebar = (props) => {
   const { pathname } = useLocation();
   const { userInfo, clearUserInfo } = useContext(UserInfoContext);
-  console.log('Sidebar', userInfo);
   const isShowUser = !pathname.includes('login') && !pathname.includes('signup');
   const renderLinks = () => {
     if (pathname === ROUTES.LOGIN || pathname === ROUTES.SIGNUP) return LINKS.LOGIN_SIGNUP;
@@ -49,7 +48,11 @@ const Sidebar = (props) => {
           </div>
           <div>
             {isShowUser && userInfo?.token && <span className={cx(styles.link, styles[`name-${userInfo.role}`])}>{userInfo.fullname}</span>}
-            {<button className={cx(styles.logout, styles.link, styles[`link-${userInfo.role}`])} onClick={() => clearUserInfo()}>Logout</button>}
+            {
+              <button className={cx(styles.logout, styles.link, styles[`link-${userInfo.role}`])} onClick={() => clearUserInfo()}>
+                {isShowUser ? 'Logout' : 'Back'}
+              </button>
+            }
           </div>
         </div>
       )}

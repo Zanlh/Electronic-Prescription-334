@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // api
-import { apiUserSignup } from '../../api/auth';
+import { apiUserSignup, apiDoctorSignup } from '../../api/auth';
 
 // common ui
 import InputForm from '../../commom-ui/InputForm';
@@ -13,6 +13,8 @@ import FormContainer from '../../components/Container/FormContainer';
 // hoc  
 import statusWrapper from '../../hoc/statusWrapper';
 
+import { UserInfoContext } from '../../context/userContext';
+
 const labels = {
   fullname: 'Fullname',
   password: 'Password',
@@ -20,6 +22,7 @@ const labels = {
 };
 
 const SignupPage = () => {
+  const { userInfo } = useContext(UserInfoContext);
   const [info, setInfo] = useState({});
 
   const [errors, setErrors] = useState({});
@@ -27,7 +30,7 @@ const SignupPage = () => {
   const onInputChange = (e) => {
     const { id, value } = e.target;
     setInfo({ ...info, [id] : value});
-    setErrors({ ...errors, [id]: 'aaa' });
+    setErrors({ ...errors, [id]: null });
   }
 
   const DefaultProps = (name) => ({
@@ -38,10 +41,15 @@ const SignupPage = () => {
     error: errors[name],
   });
 
+  const fetchSignup = async ({ fullname: name, email, password }) => {
+    if (userInfo.role === 'user') return await apiUserSignup({ name, password, email });
+    return await apiDoctorSignup({ name, password, email });
+  }
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const { result, message, data } = await apiUserSignup({ name: info.fullname, password: info.password, email: info.email });
+    const { result, message, data } = await fetchSignup({ ...info });
 
     console.log(result, message, data);
   }
@@ -52,7 +60,7 @@ const SignupPage = () => {
       <InputForm { ...DefaultProps('password') } type="password" />
       <InputForm { ...DefaultProps('fullname') } type="text" />
 
-      <Button onClick={onSubmitHandler}>Register</Button>
+      <Button type="primary" onClick={onSubmitHandler}>Register</Button>
     </FormContainer>
   );
 }

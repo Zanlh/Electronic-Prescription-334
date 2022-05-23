@@ -14,3 +14,18 @@ export function apiUserLogin({ email, password }) {
     password
   })
 }
+
+export function apiDoctorLogin({ email, password }) {
+  return post('/doctor-login', {
+    email,
+    password
+  })
+}
+
+export function apiDoctorSignup({ name, email, password }) {
+  return post('/doctor-register', {
+    name,
+    email,
+    password
+  })
+}

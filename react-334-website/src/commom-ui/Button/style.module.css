@@ -6,7 +6,7 @@
 }
 
 .button {
-  background-color: #12266D;
+  
   width: 127px;
   height: 40px;
   border-radius: 10px;
@@ -19,4 +19,34 @@
 
 .button:focus {
   cursor: pointer;
+}
+
+/* user */
+
+.button-primary-user {
+  background-color: #12266D;
+}
+
+.button-secondary-user {
+  background-color: #4D6DE0;
+}
+
+/* phar */
+
+.button-primary-phar {
+  background-color: #003300;
+}
+
+.button-secondary-phar {
+  background-color: #008A00;
+}
+
+/* doctor */
+
+.button-primary-doctor {
+  background-color: #5F0C0C;
+}
+
+.button-secondary-doctor {
+  background-color: #E32B2B;
 }
