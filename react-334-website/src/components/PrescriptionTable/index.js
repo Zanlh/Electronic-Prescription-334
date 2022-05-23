@@ -9,6 +9,15 @@ import {
   apiGetPharPrescriptions,
 } from "../../api";
 
+import Popup from '../../commom-ui/Popup';
+
+const PROGRESS_STATUS = [
+  '',
+  'error',
+  'success',
+  'loading',
+]
+
 const PrescriptionTable = (props) => {
   const { id, classes, heading, data, type } = props;
 
@@ -30,6 +39,7 @@ const PrescriptionTable = (props) => {
 
   useEffect(() => {
     const fetchPrescriptions = async () => {
+      setProgress(3);
       const { result, message, data } = await getPrescription({
         token: userInfo.token,
         id,
@@ -42,6 +52,8 @@ const PrescriptionTable = (props) => {
         console.log(data.data.prescriptions);
         setPrescription([...data.data.prescriptions]);
       }
+
+      setProgress(0);
     };
 
     if (type === "prescription") {
@@ -56,7 +68,7 @@ const PrescriptionTable = (props) => {
       cellSpacing="0"
       cellPadding="5"
       className={cx(styles.table, styles[`table-border-${userInfo.role}`])}
-    >
+      >
       <tr className={cx(styles.heading, styles[`heading-${userInfo.role}`])}>
         {heading.map((heading, id) => (
           <th key={classes[id]} className={styles[classes[id]]}>
@@ -70,8 +82,8 @@ const PrescriptionTable = (props) => {
           <tr className={styles[`tr-${userInfo.role}`]}>
             {classes.map((text, id) => (
               <td
-                key={classes[id]}
-                className={{ width: `${100 / classes.length}%` }}
+              key={classes[id]}
+              className={{ width: `${100 / classes.length}%` }}
               >
                 {row[classes[id]]}
               </td>
@@ -79,6 +91,7 @@ const PrescriptionTable = (props) => {
           </tr>
         );
       })}
+      {progress !== 0 && <Popup type={PROGRESS_STATUS[progress]}/>}
     </table>
   );
 };

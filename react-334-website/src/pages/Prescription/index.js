@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Helmet } from 'react-helmet';
 
 import {
   apiGetUserIssues,
@@ -13,6 +14,7 @@ import Container from "../../commom-ui/Container";
 import SearchBar from "../../components/SearchBar";
 
 import Button from "../../commom-ui/Button";
+import Popup from "../../commom-ui/Popup";
 
 import { UserInfoContext } from "../../context/userContext";
 
@@ -52,6 +54,13 @@ const labels = {
   reaction: "Reaction",
 };
 
+const PROGRESS_STATUS = [
+  '',
+  'error',
+  'success',
+  'loading',
+]
+
 const Prescription = () => {
   const { userInfo } = useContext(UserInfoContext);
   const [info, setInfo] = useState({});
@@ -84,6 +93,7 @@ const Prescription = () => {
   };
 
   const fetchIssues = async () => {
+    setProgress(3);
     const { result, message, data } = await getIssues({
       token: userInfo.token,
       id: userInfo.userId,
@@ -95,6 +105,8 @@ const Prescription = () => {
       setProgress(2);
       setIssues([...data.data.issues]);
     }
+
+    setInterval(() => setProgress(0), 1000);
   };
 
   useEffect(() => {
@@ -119,6 +131,7 @@ const Prescription = () => {
   });
 
   const createIssues = async () => {
+    setProgress(3);
     const { data, result, message } = await apiCreateIssue({
       token: userInfo.token,
       id: userInfo.userId,
@@ -134,9 +147,12 @@ const Prescription = () => {
       console.log(data);
       setIssueId(data.token);
     }
+
+    setInterval(() => setProgress(0), 1000);
   };
 
   const createPrescription = async () => {
+    setProgress(3);
     const newInfo = {
       ...info,
       issue_id: add === 1 ? issueId : token,
@@ -153,72 +169,80 @@ const Prescription = () => {
       setProgress(2);
       fetchIssues();
     }
+
+    setInterval(() => setProgress(0), 1000);
   };
 
   return (
-    <Container>
-      <Title>My prescriptions</Title>
-      <SearchBar
-        value={searchValue}
-        onChange={(e) => onSearchChange(e)}
-        placeholder="prescription"
-      />
-      {targetToken === -1 ? (
-        <>
-          {userInfo.role === "doctor" && (
-            <div className={styles.buttonContainer}>
-              <Button type="primary" onClick={() => setAdd(2)}>
-                Add prescription
-              </Button>
-              <Button type="primary" onClick={() => createIssues()}>
-                Add issues
-              </Button>
-            </div>
-          )}
+    <>
+      <Helmet>
+        <title>Prescription</title>
+      </Helmet>
+      <Container>
+        {progress !== 0 && <Popup type={PROGRESS_STATUS[progress]} />}
+        <Title>My prescriptions</Title>
+        <SearchBar
+          value={searchValue}
+          onChange={(e) => onSearchChange(e)}
+          placeholder="prescription"
+          />
+        {targetToken === -1 ? (
+          <>
+            {userInfo.role === "doctor" && (
+              <div className={styles.buttonContainer}>
+                <Button type="primary" onClick={() => setAdd(2)}>
+                  Add prescription
+                </Button>
+                <Button type="primary" onClick={() => createIssues()}>
+                  Add issues
+                </Button>
+              </div>
+            )}
 
-          {add === 1 || add === 2 ? (
-            <MedicalCard drop={2} onClose={() => setAdd(0)}>
-              {Object.keys(labels).map((name) => {
-                if (name === "token" && add === 1) return null;
-                return (
-                  <InputForm
+            {add === 1 || add === 2 ? (
+              <MedicalCard drop={2} onClose={() => setAdd(0)}>
+                {Object.keys(labels).map((name) => {
+                  if (name === "token" && add === 1) return null;
+                  return (
+                    <InputForm
                     {...DefaultProps(`${name}`)}
                     type="textArea"
                     sz={(name === "advice" || name === "reaction") && "big"}
-                  />
-                );
-              })}
-              <Button type="secondary" onClick={() => createPrescription()}>
-                Add
-              </Button>
-            </MedicalCard>
-          ) : null}
-
-          {userInfo.role !== "phar" &&
-            issues.map((issue) => (
-              <MedicalCard title={issue.token}>
-                <PrescriptionTable
-                  id={issue.token}
-                  type="prescription"
-                  classes={CLASSES}
-                  heading={HEADING}
-                  data={prescription}
-                />
+                    />
+                    );
+                  })}
+                <Button type="secondary" onClick={() => createPrescription()}>
+                  Add
+                </Button>
               </MedicalCard>
-            ))}
-        </>
-      ) : (
-        <MedicalCard title={targetToken}>
-          <PrescriptionTable
-            id={targetToken}
-            type="prescription"
-            classes={CLASSES}
-            heading={HEADING}
-            data={prescription}
-          />
-        </MedicalCard>
-      )}
-    </Container>
+            ) : null}
+
+            {userInfo.role !== "phar" &&
+              issues.map((issue) => (
+                <MedicalCard title={issue.token}>
+                  <PrescriptionTable
+                    id={issue.token}
+                    type="prescription"
+                    classes={CLASSES}
+                    heading={HEADING}
+                    data={prescription}
+                    />
+                </MedicalCard>
+              ))}
+          </>
+        ) : (
+          <MedicalCard title={targetToken}>
+            <PrescriptionTable
+              id={targetToken}
+              type="prescription"
+              classes={CLASSES}
+              heading={HEADING}
+              data={prescription}
+              />
+          </MedicalCard>
+        )}
+      </Container>
+    </>
   );
 };
 

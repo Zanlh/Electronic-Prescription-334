@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Helmet } from 'react-helmet';
+
 import { UserInfoContext } from "../../context/userContext";
 
 import { apiGetUsers } from "../../api";
@@ -11,18 +13,37 @@ import Button from "../../commom-ui/Button";
 import FormContainer from "../../components/Container/FormContainer";
 import InputForm from "../../commom-ui/InputForm";
 
+import Popup from "../../commom-ui/Popup";
+
 import { TextMatching } from "../../algo";
+
+const PROGRESS_STATUS = [
+  '',
+  'error',
+  'success',
+  'loading',
+]
 
 const FindUser = ({ navigation }) => {
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const [email, setEmail] = useState();
   const [users, setUsers] = useState([]);
+  const [progress, setProgress] = useState(0);
 
   const getUsers = async () => {
+    setProgress(3);
     const { data, message, result } = await apiGetUsers({
       token: userInfo.token,
     });
-    setUsers([...data.data.users]);
+
+    if (result !== "1" || !data) {
+      setProgress(1);
+    } else {
+      setProgress(2);
+      setUsers([...data.data.users]);
+    }
+
+    setInterval(() => setProgress(0), 1000);
   };
 
   useEffect(() => {
@@ -51,19 +72,26 @@ const FindUser = ({ navigation }) => {
 
   console.log(userInfo);
   return (
-    <FormContainer headerContent="Search patient">
-      <InputForm
-        id="email"
-        label="email"
-        value={email}
-        type="text"
-        onChange={(e) => onInputChange(e)}
-      />
+    <>
+      <Helmet>
+        <title>Find patient</title>
+      </Helmet>
 
-      <Button type="primary" onClick={onSubmitHandler}>
-        Search
-      </Button>
-    </FormContainer>
+      <FormContainer headerContent="Search patient">
+        {progress !== 0 && <Popup type={PROGRESS_STATUS[progress]} />}
+        <InputForm
+          id="email"
+          label="email"
+          value={email}
+          type="text"
+          onChange={(e) => onInputChange(e)}
+        />
+
+        <Button type="primary" onClick={onSubmitHandler}>
+          Search
+        </Button>
+      </FormContainer>
+    </>
   );
 };
 

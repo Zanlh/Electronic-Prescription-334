@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-
+import { Helmet } from 'react-helmet';
 import SearchBar from "../../components/SearchBar";
 
 import Title from "../../commom-ui/Title";
@@ -21,6 +21,7 @@ import { UserInfoContext } from "../../context/userContext";
 import PrescriptionTable from "../../components/PrescriptionTable";
 
 import Button from "../../commom-ui/Button";
+import Popup from "../../commom-ui/Popup";
 
 import InputForm from "../../commom-ui/InputForm";
 
@@ -33,6 +34,13 @@ const labels = {
   name: "Name",
   description: "Description",
 };
+
+const PROGRESS_STATUS = [
+  '',
+  'error',
+  'success',
+  'loading',
+]
 
 const Medication = () => {
   const { userInfo } = useContext(UserInfoContext);
@@ -62,6 +70,7 @@ const Medication = () => {
   };
 
   const fetchMedication = async () => {
+    setProgress(3);
     const { result, message, data } = await getMedication({
       token: userInfo.token,
       id: userInfo.userId,
@@ -74,6 +83,7 @@ const Medication = () => {
       console.log(data.data.medicines);
       setMedication([...data.data.medicines]);
     }
+    setInterval(() => setProgress(0), 1000);
   };
 
   useEffect(() => {
@@ -93,61 +103,74 @@ const Medication = () => {
   });
 
   const onCreateMedication = async () => {
+    setProgress(3);
     const { result, data, message } = await apiCreateUserMedication({
       ...info,
       token: userInfo.token,
     });
     if (result === "1" && data) {
+      setProgress(2);
       fetchMedication();
+    } else {
+      setProgress(1);
     }
+
+    setInterval(() => setProgress(0), 1000);
   };
 
   return (
-    <Container>
-      <Title>Medications</Title>
-      <SearchBar
-        value={searchValue}
-        onChange={(e) => onSearchChange(e)}
-        placeholder="medication"
-      />
-      {target ? (
-        <PrescriptionTable
-          type="medication"
-          classes={CLASSES}
-          heading={HEADING}
-          data={target}
+    <>
+      <Helmet>
+        <title>Medication</title>
+      </Helmet>
+
+      <Container>
+        {progress !== 0 && <Popup type={PROGRESS_STATUS[progress]} />}
+        <Title>Medications</Title>
+        <SearchBar
+          value={searchValue}
+          onChange={(e) => onSearchChange(e)}
+          placeholder="medication"
         />
-      ) : (
-        <>
-          {userInfo.role === "user" && (
-            <Button type="primary" onClick={() => setAdd(1)}>
-              Add
-            </Button>
-          )}
-
-          {add === 1 ? (
-            <MedicalCard drop={2} onClose={() => setAdd(0)}>
-              <InputForm {...DefaultProps("name")} type="textArea" />
-              <InputForm
-                {...DefaultProps("description")}
-                sz="big"
-                type="textArea"
-              />
-              <Button type="secondary" onClick={() => onCreateMedication()}>
-                Add
-              </Button>
-            </MedicalCard>
-          ) : null}
-
+        {target ? (
           <PrescriptionTable
             type="medication"
             classes={CLASSES}
             heading={HEADING}
-            data={medication}
+            data={target}
           />
-        </>
-      )}
-    </Container>
+        ) : (
+          <>
+            {userInfo.role === "user" && (
+              <Button type="primary" onClick={() => setAdd(1)}>
+                Add
+              </Button>
+            )}
+
+            {add === 1 ? (
+              <MedicalCard drop={2} onClose={() => setAdd(0)}>
+                <InputForm {...DefaultProps("name")} type="textArea" />
+                <InputForm
+                  {...DefaultProps("description")}
+                  sz="big"
+                  type="textArea"
+                />
+                <Button type="secondary" onClick={() => onCreateMedication()}>
+                  Add
+                </Button>
+              </MedicalCard>
+            ) : null}
+
+            <PrescriptionTable
+              type="medication"
+              classes={CLASSES}
+              heading={HEADING}
+              data={medication}
+            />
+          </>
+        )}
+      </Container>
+    </>
   );
 };
 

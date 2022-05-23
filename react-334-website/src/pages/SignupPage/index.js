@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
-
+import { Helmet } from 'react-helmet';
 // api
 import { apiUserSignup, apiDoctorSignup, apiPharSignup } from "../../api/auth";
 
 // common ui
 import InputForm from "../../commom-ui/InputForm";
 import Button from "../../commom-ui/Button";
+import Popup from "../../commom-ui/Popup";
 
 // components
 import FormContainer from "../../components/Container/FormContainer";
@@ -21,10 +22,17 @@ const labels = {
   email: "Email",
 };
 
+const PROGRESS_STATUS = [
+  '',
+  'error',
+  'success',
+  'loading',
+]
+
 const SignupPage = () => {
   const { userInfo } = useContext(UserInfoContext);
   const [info, setInfo] = useState({});
-
+  const [progress, setProgress] = useState(0);
   // const [errors, setErrors] = useState({});
 
   const onInputChange = (e) => {
@@ -50,23 +58,35 @@ const SignupPage = () => {
   };
 
   const onSubmitHandler = async (e) => {
+    setProgress(3);
     e.preventDefault();
 
     const { result, message, data } = await fetchSignup({ ...info });
+    if (result !== "1" || data) {
+      setProgress(1);
+    } else {
+      setProgress(2);
+    }
 
-    console.log(result, message, data);
+    setInterval(() => setProgress(0), 1000);
   };
 
   return (
-    <FormContainer headerContent="Register">
-      <InputForm {...DefaultProps("email")} type="text" />
-      <InputForm {...DefaultProps("password")} type="password" />
-      <InputForm {...DefaultProps("fullname")} type="text" />
+    <>
+      <Helmet>
+        <title>Sign up</title>
+      </Helmet>
+      <FormContainer headerContent="Register">
+        {progress !== 0 && <Popup type={PROGRESS_STATUS[progress]} />}
+        <InputForm {...DefaultProps("email")} type="text" />
+        <InputForm {...DefaultProps("password")} type="password" />
+        <InputForm {...DefaultProps("fullname")} type="text" />
 
-      <Button type="primary" onClick={onSubmitHandler}>
-        Register
-      </Button>
-    </FormContainer>
+        <Button type="primary" onClick={onSubmitHandler}>
+          Register
+        </Button>
+      </FormContainer>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import { Helmet } from 'react-helmet';
 import styles from "./style.module.css";
 
 import { UserInfoContext } from "../../context/userContext";
@@ -22,17 +22,23 @@ const HomePage = ({ navigation }) => {
   };
 
   return (
-    <div className={styles.container} onClick={onClickHandler}>
-      <button name="user" className={styles.user}>
-        User
-      </button>
-      <button name="phar" className={styles.phar}>
-        Pharmacist
-      </button>
-      <button name="doctor" className={styles.doctor}>
-        Doctor
-      </button>
-    </div>
+    <>
+      <Helmet>
+        <title>Home page</title>
+      </Helmet>
+
+      <div className={styles.container} onClick={onClickHandler}>
+        <button name="user" className={styles.user}>
+          User
+        </button>
+        <button name="phar" className={styles.phar}>
+          Pharmacist
+        </button>
+        <button name="doctor" className={styles.doctor}>
+          Doctor
+        </button>
+      </div>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-
+import { Helmet } from 'react-helmet';
 import SearchBar from "../../components/SearchBar";
 
 import Title from "../../commom-ui/Title";
@@ -18,6 +18,7 @@ import {
 
 import { UserInfoContext } from "../../context/userContext";
 import Button from "../../commom-ui/Button";
+import Popup from "../../commom-ui/Popup";
 import InputForm from "../../commom-ui/InputForm";
 
 import PrescriptionTable from "../../components/PrescriptionTable";
@@ -31,6 +32,13 @@ const labels = {
   name: "Name",
   description: "Description",
 };
+
+const PROGRESS_STATUS = [
+  '',
+  'error',
+  'success',
+  'loading',
+]
 
 const TreatmentPlan = () => {
   const { userInfo } = useContext(UserInfoContext);
@@ -62,6 +70,7 @@ const TreatmentPlan = () => {
 
   console.log(userInfo);
   const fetchTreatment = async () => {
+    setProgress(3);
     const { result, message, data } = await getTreatment({
       token: userInfo.token,
       id: userInfo.userId,
@@ -74,6 +83,8 @@ const TreatmentPlan = () => {
       console.log(data.data.treatments);
       setTreament([...data.data.treatments]);
     }
+
+    setInterval(() => setProgress(0), 1000);
   };
 
   useEffect(() => {
@@ -93,61 +104,74 @@ const TreatmentPlan = () => {
   });
 
   const onCreateTreatment = async () => {
+    setProgress(3);
     const { result, data, message } = await apiCreateTreatment({
       ...info,
       token: userInfo.token,
     });
     if (result === "1" && data) {
+      setProgress(2);
       fetchTreatment();
+    } else {
+      setProgress(1);
     }
+
+    setInterval(() => setProgress(0), 1000);
   };
 
   return (
-    <Container>
-      <Title>Treatment</Title>
-      <SearchBar
-        value={searchValue}
-        onChange={(e) => onSearchChange(e)}
-        placeholder="treatment"
-      />
-      {target ? (
-        <PrescriptionTable
-          type="treatment"
-          classes={CLASSES}
-          heading={HEADING}
-          data={target}
+    <>
+      <Helmet>
+        <title>Prescription</title>
+      </Helmet>
+
+      <Container>
+        {progress !== 0 && <Popup type={PROGRESS_STATUS[progress]} />}
+        <Title>Treatment</Title>
+        <SearchBar
+          value={searchValue}
+          onChange={(e) => onSearchChange(e)}
+          placeholder="treatment"
         />
-      ) : (
-        <>
-          {userInfo.role === "user" && (
-            <Button type="primary" onClick={() => setAdd(1)}>
-              Add
-            </Button>
-          )}
-
-          {add === 1 ? (
-            <MedicalCard drop={2} onClose={() => setAdd(0)}>
-              <InputForm {...DefaultProps("name")} type="textArea" />
-              <InputForm
-                {...DefaultProps("description")}
-                sz="big"
-                type="textArea"
-              />
-              <Button type="secondary" onClick={() => onCreateTreatment()}>
-                Add
-              </Button>
-            </MedicalCard>
-          ) : null}
-
+        {target ? (
           <PrescriptionTable
-            type="medication"
+            type="treatment"
             classes={CLASSES}
             heading={HEADING}
-            data={treatment}
+            data={target}
           />
-        </>
-      )}
-    </Container>
+        ) : (
+          <>
+            {userInfo.role === "user" && (
+              <Button type="primary" onClick={() => setAdd(1)}>
+                Add
+              </Button>
+            )}
+
+            {add === 1 ? (
+              <MedicalCard drop={2} onClose={() => setAdd(0)}>
+                <InputForm {...DefaultProps("name")} type="textArea" />
+                <InputForm
+                  {...DefaultProps("description")}
+                  sz="big"
+                  type="textArea"
+                />
+                <Button type="secondary" onClick={() => onCreateTreatment()}>
+                  Add
+                </Button>
+              </MedicalCard>
+            ) : null}
+
+            <PrescriptionTable
+              type="medication"
+              classes={CLASSES}
+              heading={HEADING}
+              data={treatment}
+            />
+          </>
+        )}
+      </Container>
+    </>
   );
 };
 

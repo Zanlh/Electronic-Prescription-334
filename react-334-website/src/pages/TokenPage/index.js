@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext} from "react";
-
+import { Helmet } from 'react-helmet';
 import styles from "./style.module.css";
 
 import SearchBar from "../../components/SearchBar";
 
 import Title from "../../commom-ui/Title";
+import Popup from "../../commom-ui/Popup";
 import Container from "../../commom-ui/Container";
 
 import TokenImage from "../../img/token.png";
@@ -17,6 +18,13 @@ import { UserInfoContext } from '../../context/userContext';
 import { apiGetUserIssues } from '../../api';
 
 import { TextMatching } from "../../algo";
+
+const PROGRESS_STATUS = [
+  '',
+  'error',
+  'success',
+  'loading',
+]
 
 const TokenPage = () => {
   const { userInfo } = useContext(UserInfoContext);
@@ -42,6 +50,7 @@ const TokenPage = () => {
   };
 
   const fetchIssues = async () => {
+    setProgress(3);
     const { result, message, data } = await getIssues({
       token: userInfo.token,
       id: userInfo.userId,
@@ -53,6 +62,8 @@ const TokenPage = () => {
       setProgress(2);
       setIssues([...data.data.issues]);
     }
+
+    setInterval(() => setProgress(0), 1000);
   };
 
   useEffect(() => {
@@ -64,28 +75,35 @@ const TokenPage = () => {
   console.log(targetToken);
 
   return (
-    <Container>
-      <Title>Token</Title>
-      <SearchBar
-        value={searchValue}
-        onChange={(e) => onSearchChange(e)}
-        placeholder="token"
-      />
-     
+    <>
+      <Helmet>
+        <title>Prescription</title>
+      </Helmet>
 
-      <div className={styles.tokenContainer}>
-      {!targetToken ? <>{issues.map((issue) => (
-          <div className={styles.token}>
-            <img className={styles.qr} src={TokenImage} alt="token" />
-            <div className={styles.text}>{issue.token}</div>
-          </div>
-        ))}
-        </> : <div className={styles.token}>
-            <img className={styles.qr} src={TokenImage} alt="token" />
-            <div className={styles.text}>{targetToken[0].token}</div>
-          </div>}
-      </div>
-    </Container>
+      <Container>
+        {progress !== 0 && <Popup type={PROGRESS_STATUS[progress]} />}
+        <Title>Token</Title>
+        <SearchBar
+          value={searchValue}
+          onChange={(e) => onSearchChange(e)}
+          placeholder="token"
+        />
+      
+
+        <div className={styles.tokenContainer}>
+        {!targetToken ? <>{issues.map((issue) => (
+            <div className={styles.token}>
+              <img className={styles.qr} src={TokenImage} alt="token" />
+              <div className={styles.text}>{issue.token}</div>
+            </div>
+          ))}
+          </> : <div className={styles.token}>
+              <img className={styles.qr} src={TokenImage} alt="token" />
+              <div className={styles.text}>{targetToken[0].token}</div>
+            </div>}
+        </div>
+      </Container>
+    </>
   );
 };
 

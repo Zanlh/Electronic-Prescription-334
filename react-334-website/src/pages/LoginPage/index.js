@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-
+import { Helmet } from 'react-helmet'
 // api
 import { apiUserLogin, apiDoctorLogin, apiPharLogin } from "../../api/auth";
 
@@ -25,6 +25,13 @@ const labels = {
   password: "Password",
   email: "Email",
 };
+
+const PROGRESS_STATUS = [
+  '',
+  'error',
+  'success',
+  'loading',
+]
 
 const LoginPage = ({ navigation }) => {
   const [info, setInfo] = useState({});
@@ -56,27 +63,33 @@ const LoginPage = ({ navigation }) => {
     return await apiPharLogin({ password, email });
   };
 
+  console.log(PROGRESS_STATUS[progress]);
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
+    setProgress(3);
     const { result, message, data } = await fetchLogin({ ...info });
-
     if (result !== "1" || !data || !data.token) {
       setProgress(1);
     } else {
       setProgress(2);
-      console.log(result, message, data);
       setUserInfo({ token: data.token });
-      console.log("login", data);
 
       if (userInfo.role === "user") navigation("/user-prescriptions");
       else if (userInfo.role === "doctor") navigation("/doctor-find");
       else navigation("/phar-prescription");
     }
+    setInterval(() => setProgress(0), 1000);
   };
 
   return (
+    <>
+    <Helmet>
+      <title>Login</title>
+    </Helmet>
+   
     <FormContainer headerContent="Login">
+      {progress !== 0 && <Popup type={PROGRESS_STATUS[progress]} />}
       <InputForm {...DefaultProps("email")} type="text" />
       <InputForm {...DefaultProps("password")} type="password" />
 
@@ -84,8 +97,8 @@ const LoginPage = ({ navigation }) => {
         Login
       </Button>
 
-      <Popup type="error" />
     </FormContainer>
+    </>
   );
 };
 

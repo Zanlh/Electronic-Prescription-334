@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   padding: 20px;
+  z-index: 100;
 }
 
 .success {
@@ -19,6 +20,10 @@
 
 .error {
   background-color: #E32B2B;
+}
+
+.loading {
+  background-color: #0082f0;
 }
 
 .text {
