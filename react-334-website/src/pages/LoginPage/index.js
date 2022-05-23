@@ -1,29 +1,29 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 
 // api
-import { apiUserLogin, apiDoctorLogin, apiPharLogin } from '../../api/auth';
+import { apiUserLogin, apiDoctorLogin, apiPharLogin } from "../../api/auth";
 
 // common ui
-import InputForm from '../../commom-ui/InputForm';
-import Button from '../../commom-ui/Button';
+import InputForm from "../../commom-ui/InputForm";
+import Button from "../../commom-ui/Button";
 
 // components
-import FormContainer from '../../components/Container/FormContainer';
+import FormContainer from "../../components/Container/FormContainer";
 
-import { withRouter } from '../../hooks/withRouter';
+import { withRouter } from "../../hooks/withRouter";
 
 // context
-import { UserInfoContext } from '../../context/userContext';
+import { UserInfoContext } from "../../context/userContext";
 
 // common-ui
-import Popup from '../../commom-ui/Popup';
+import Popup from "../../commom-ui/Popup";
 
-// hoc  
-import statusWrapper from '../../hoc/statusWrapper';
+// hoc
+import statusWrapper from "../../hoc/statusWrapper";
 
 const labels = {
-  password: 'Password',
-  email: 'Email',
+  password: "Password",
+  email: "Email",
 };
 
 const LoginPage = ({ navigation }) => {
@@ -36,9 +36,9 @@ const LoginPage = ({ navigation }) => {
 
   const onInputChange = (e) => {
     const { id, value } = e.target;
-    setInfo({ ...info, [id] : value});
+    setInfo({ ...info, [id]: value });
     setErrors({ ...errors, [id]: null });
-  }
+  };
 
   const DefaultProps = (name) => ({
     id: name,
@@ -49,15 +49,17 @@ const LoginPage = ({ navigation }) => {
   });
 
   const fetchLogin = async ({ email, password }) => {
-    if (userInfo.role === 'user') return await apiUserLogin({ password, email });
-    if (userInfo.role === 'doctor') return await apiDoctorLogin({ password, email });
+    if (userInfo.role === "user")
+      return await apiUserLogin({ password, email });
+    if (userInfo.role === "doctor")
+      return await apiDoctorLogin({ password, email });
     return await apiPharLogin({ password, email });
-  }
+  };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-  
-    const { result, message, data} = await fetchLogin({ ...info });
+
+    const { result, message, data } = await fetchLogin({ ...info });
 
     if (result !== "1" || !data || !data.token) {
       setProgress(1);
@@ -65,24 +67,26 @@ const LoginPage = ({ navigation }) => {
       setProgress(2);
       console.log(result, message, data);
       setUserInfo({ token: data.token });
-      console.log('login', data);
+      console.log("login", data);
 
-      if (userInfo.role === 'user') navigation('/user-prescriptions');
-      else if (userInfo.role === 'doctor') navigation('/doctor-find');
-      else navigation('/phar-prescription');
+      if (userInfo.role === "user") navigation("/user-prescriptions");
+      else if (userInfo.role === "doctor") navigation("/doctor-find");
+      else navigation("/phar-prescription");
     }
-  }
-  
+  };
+
   return (
     <FormContainer headerContent="Login">
-      <InputForm { ...DefaultProps('email') } type="text" />
-      <InputForm { ...DefaultProps('password') } type="password" />
+      <InputForm {...DefaultProps("email")} type="text" />
+      <InputForm {...DefaultProps("password")} type="password" />
 
-      <Button type="primary" onClick={onSubmitHandler}>Login</Button>
+      <Button type="primary" onClick={onSubmitHandler}>
+        Login
+      </Button>
 
       <Popup type="error" />
     </FormContainer>
   );
-}
+};
 
 export default statusWrapper(withRouter(LoginPage));

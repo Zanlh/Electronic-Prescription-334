@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { Routes, Route } from 'react-router-dom';
-import ROUTES from './routes';
+import { Routes, Route } from "react-router-dom";
+import ROUTES from "./routes";
 
 export function renderRoutes() {
   return (
@@ -12,7 +12,7 @@ export function renderRoutes() {
             key={route.path}
             exact={route.exact}
             path={route.path}
-            element={route.element} 
+            element={route.element}
           />
         );
       })}

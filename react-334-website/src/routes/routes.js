@@ -7,7 +7,6 @@ import TokenPage from '../pages/TokenPage';
 import Prescription from '../pages/Prescription';
 import TreatmentPlan from '../pages/TreatmentPlan';
 import Medication from '../pages/Medication';
-import PrescriptionDetail from '../pages/PrescriptionDetail';
 
 import Find from '../pages/Find';
 
@@ -46,11 +45,6 @@ const ROUTES_DETAILS = [
     path: ROUTES.USER_MEDICATION,
     exact: true,
     element: <Medication />
-  },
-  {
-    path: ROUTES.USER_PRESCRIPTION_DETAIL,
-    exact: true,
-    element: <PrescriptionDetail />
   },
   {
     path: ROUTES.DOCTOR_FIND,

@@ -1,46 +1,46 @@
-import { get, post } from '../utils/fetchApi';
+import { get, post } from "../utils/fetchApi";
 
 export function apiUserSignup({ name, email, password }) {
-  return post('/user-register', {
+  return post("/user-register", {
     name,
     email,
-    password
+    password,
   });
 }
 
 export function apiUserLogin({ email, password }) {
-  return post('/user-login', {
+  return post("/user-login", {
     email,
-    password
-  })
+    password,
+  });
 }
 
 export function apiDoctorLogin({ email, password }) {
-  return post('/doctor-login', {
+  return post("/doctor-login", {
     email,
-    password
-  })
+    password,
+  });
 }
 
 export function apiDoctorSignup({ name, email, password }) {
-  return post('/doctor-register', {
+  return post("/doctor-register", {
     name,
     email,
-    password
-  })
+    password,
+  });
 }
 
 export function apiPharLogin({ email, password }) {
-  return post('/pharmacy-login', {
+  return post("/pharmacy-login", {
     email,
     password,
-  })
+  });
 }
 
 export function apiPharSignup({ email, password, name }) {
-  return post('/pharmacy-register', {
+  return post("/pharmacy-register", {
     name,
     email,
-    password
-  })
+    password,
+  });
 }

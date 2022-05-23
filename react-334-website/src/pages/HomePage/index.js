@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import styles from './style.module.css';
+import styles from "./style.module.css";
 
-import { UserInfoContext } from '../../context/userContext';
+import { UserInfoContext } from "../../context/userContext";
 
-import { withRouter } from '../../hooks/withRouter';
-import { Navigate } from 'react-router-dom';
-
+import { withRouter } from "../../hooks/withRouter";
+import { Navigate } from "react-router-dom";
 
 const HomePage = ({ navigation }) => {
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
@@ -19,16 +18,22 @@ const HomePage = ({ navigation }) => {
 
     setUserInfo({ ...userInfo, role: name });
 
-    navigation('/login');
+    navigation("/login");
   };
 
   return (
     <div className={styles.container} onClick={onClickHandler}>
-      <button name="user" className={styles.user}>User</button>
-      <button name="phar" className={styles.phar}>Pharmacist</button>
-      <button name="doctor" className={styles.doctor}>Doctor</button>
+      <button name="user" className={styles.user}>
+        User
+      </button>
+      <button name="phar" className={styles.phar}>
+        Pharmacist
+      </button>
+      <button name="doctor" className={styles.doctor}>
+        Doctor
+      </button>
     </div>
-  )
-}
+  );
+};
 
 export default withRouter(HomePage);

@@ -7,7 +7,6 @@ export const TOKEN = '/user-token';
 export const USER_PRESCRIPTION = '/user-prescriptions';
 export const USER_TREATMANT = '/user-treatmentplan';
 export const USER_MEDICATION = '/user-medications';
-export const USER_PRESCRIPTION_DETAIL = '/user-prescriptions/:id/details';
 
 export const DOCTOR_FIND = '/doctor-find';
 export const DOCTOR_PRESCRIPTION = '/doctor-prescription';

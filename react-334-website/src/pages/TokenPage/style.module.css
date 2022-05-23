@@ -2,6 +2,8 @@
   margin-left: 50px;
   margin-right: 50px;
   width: 100%;
+
+  display: flex;
 }
 
 .title {
@@ -10,6 +12,11 @@
   line-height: 47px;
   margin-top: 40px;
   color: #12266D;
+}
+
+.tokenContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .token {

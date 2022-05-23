@@ -24,6 +24,8 @@ import MedicalCard from "../../components/MedicalCard";
 import PrescriptionTable from "../../components/PrescriptionTable";
 import { TextMatching } from "../../algo";
 
+import styles from './style.module.css';
+
 const CLASSES = [
   "name",
   "created_at",
@@ -59,18 +61,18 @@ const Prescription = () => {
   const [add, setAdd] = useState(0);
   const [token, setToken] = useState(0);
   const [targetToken, setTargetToken] = useState(-1);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   const onSearchChange = (e) => {
-    const { value } = e.target
+    const { value } = e.target;
     setSearchValue(value);
 
     console.log(value);
 
-    const position = TextMatching('token', value, issues);
-    if (position) setTargetToken(value);
+    const target = TextMatching("token", value, issues);
+    if (target.length > 0) setTargetToken(value);
     else setTargetToken(-1);
-  }
+  };
 
   console.log(targetToken);
 
@@ -156,19 +158,22 @@ const Prescription = () => {
   return (
     <Container>
       <Title>My prescriptions</Title>
-      <SearchBar value={searchValue} onChange={(e) => onSearchChange(e)} placeholder="prescription" />
+      <SearchBar
+        value={searchValue}
+        onChange={(e) => onSearchChange(e)}
+        placeholder="prescription"
+      />
       {targetToken === -1 ? (
         <>
           {userInfo.role === "doctor" && (
-            <Button type="primary" onClick={() => createIssues()}>
-              Add issues
-            </Button>
-          )}
-
-          {userInfo.role === "doctor" && (
-            <Button type="primary" onClick={() => setAdd(2)}>
-              Add prescription
-            </Button>
+            <div className={styles.buttonContainer}>
+              <Button type="primary" onClick={() => setAdd(2)}>
+                Add prescription
+              </Button>
+              <Button type="primary" onClick={() => createIssues()}>
+                Add issues
+              </Button>
+            </div>
           )}
 
           {add === 1 || add === 2 ? (

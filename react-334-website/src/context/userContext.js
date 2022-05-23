@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 
-import { apiGetUserInfo, apiGetDoctorInfo, apiGetPharInfo } from '../api/'; 
+import { apiGetUserInfo, apiGetDoctorInfo, apiGetPharInfo } from "../api/";
 
-const USER_INFO_STORAGE = 'user-info';
+const USER_INFO_STORAGE = "user-info";
 
 const DEFAULT_USER_INFO = {
-  email: '',
-  fullname: '',
-  role: '',
+  email: "",
+  fullname: "",
+  role: "",
   token: null,
 };
 
@@ -24,13 +24,13 @@ export function UserInfoProvider(props) {
   });
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log('context', userInfo, isLoaded);
+  console.log("context", userInfo, isLoaded);
 
   const getInfo = async (token) => {
-    if (userInfo.role === 'user') return await apiGetUserInfo({ token });
-    if (userInfo.role === 'doctor') return await apiGetDoctorInfo({ token });
+    if (userInfo.role === "user") return await apiGetUserInfo({ token });
+    if (userInfo.role === "doctor") return await apiGetDoctorInfo({ token });
     return await apiGetPharInfo({ token });
-  }
+  };
 
   const getUserInfo = async () => {
     console.log(userInfo);
@@ -83,14 +83,15 @@ export function UserInfoProvider(props) {
 
   return (
     <UserInfoContext.Provider
-     value={{
-      userInfo,
-      setUserInfo: (info) => setUserInfo((userInfo) => {
-        return { ...userInfo, ...info }
-      }),
-      clearUserInfo,
-      getUserInfo,
-     }}
+      value={{
+        userInfo,
+        setUserInfo: (info) =>
+          setUserInfo((userInfo) => {
+            return { ...userInfo, ...info };
+          }),
+        clearUserInfo,
+        getUserInfo,
+      }}
     >
       {props.children}
     </UserInfoContext.Provider>

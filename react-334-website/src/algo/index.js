@@ -1,10 +1,6 @@
 export const TextMatching = (source, target, arr) => {
-  return arr.find(element => element[source] === target);
-}
-
-export const TokenMatch = (token, arr) => {
-  return arr.find(element => {
-    console.log(element);
-    return element.token === token;
-  });
+  return arr.reduce((cur, element) => {
+    if (element[source] === target) cur.push(element);
+    return cur;
+  }, []);
 }
